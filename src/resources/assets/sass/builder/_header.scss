@@ -1,0 +1,38 @@
+.header{
+    position: absolute;
+    top: 0;
+	width: 100%;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 6px;
+   	height: $header-height;
+    border-bottom: 1px solid $bordercolor;
+
+    label{
+        display: block;
+        padding: 8px 0 2px 6px;
+        font-size: $font-size-smaller;
+    }
+    input{
+        position: absolute;
+        width: 20%;
+        margin-left: 1em;
+        box-sizing: border-box;
+        padding: 4px 0 3px 6px;
+        border: 1px solid transparent;
+        border-bottom: 1px solid grey;
+        font-size: $font-size-bigger;
+        &:focus{
+            background-color: #e5f2ef;
+        }
+    }
+
+}
+
+.header--title{
+	float: left;
+	font-size: $font-size-biggest;
+	margin: 0;
+    padding: 0;
+}
+

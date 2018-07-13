@@ -1,0 +1,83 @@
+.left-sidebar, .right-sidebar{
+    position: absolute;
+    top: $header-height;
+	height: calc( 100% - #{$header-height});
+    display: inline-block;
+    box-sizing: border-box;
+
+    background-color: white;
+}
+.left-sidebar{
+    padding: 12px 4px 0 4px;
+    width: 120px;
+    z-index: 1;
+    border-right: 1px solid $bordercolor;
+}
+.right-sidebar{
+    padding: 0 4px 0 4px;
+    right: 0;
+	width: 240px;
+    z-index: 5;
+	border-left: 1px solid $bordercolor;;
+}
+
+.sidebar-title{
+    font-size: $font-size-bigger;
+    margin: 0;
+    padding: 24px 0 8px;
+    text-align: center;
+}
+
+.right-sidebar{
+    label{
+        display: block;
+        padding: 8px 0 2px 6px;
+        font-size: $font-size-smaller;
+    }
+    input{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 4px 0 3px 6px;
+        border: 1px solid transparent;
+        border-bottom: 1px solid grey;
+        font-size: $font-size-bigger;
+        &:focus{
+            background-color: #e5f2ef;
+        }
+    }
+    .create input{
+        width: 77%;
+        font-size: 1em;
+        margin-left: -6px;
+        margin-top: -4px;
+        padding: 1px 4px;
+    }
+
+    .prop, .key, .create{
+        padding: 2px 8px;
+    }
+
+    .icon {
+        margin: 0 -1px;
+        &:hover{
+            background-color: $primaryback;
+        }
+        &.right{
+            float: right;
+            visibility: hidden;
+        }
+    }
+
+    .prop:hover .icon, .key:hover .icon {
+        border: 1px solid #8BC34A;
+        visibility: visible;
+    }
+
+    .create i,.icon {
+        margin: 0 -1px;
+        cursor: pointer;
+        border: 1px solid white;
+        border-radius: 4px;
+    }
+
+}

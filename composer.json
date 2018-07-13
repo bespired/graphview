@@ -1,0 +1,25 @@
+{
+    "name": "bespired/graphview",
+    "description": "Graphview",
+    "authors": [{
+        "name": "Joeri Kassenaar",
+        "email": "joeri@bespired.nl"
+    }],
+    "minimum-stability": "stable",
+    "require": {
+        "symfony/yaml": "^3.4",
+        "ramsey/uuid": "^3.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bespired\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bespired\\Graphview\\ServiceProvider"
+            ]
+        }
+    }
+}

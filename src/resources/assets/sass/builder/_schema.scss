@@ -1,0 +1,23 @@
+#app{
+	height: 100vh;
+	user-select: none;
+	*:focus {
+    	outline: none;
+	}
+
+}
+.schema{
+	position: absolute;
+	top: $header-height;
+    left: 0px;
+    background-color: $lightback;
+    overflow: hidden;
+    width: calc(100%);
+    height: calc(100% - #{$header-height});
+}
+
+.index{
+	tr{
+		transition: .2s;
+	}
+}

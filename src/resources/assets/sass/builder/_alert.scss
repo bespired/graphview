@@ -1,0 +1,40 @@
+.alert-error, .alert-success{
+	position: absolute;
+	top: calc(20px + #{$header-height});
+	left: 140px;
+	right: 260px;
+	padding: 1em;
+	text-align: center;
+	background-color: $primaryback;
+	display: none;
+	border-bottom: 1px solid $darkshade;
+	z-index: 5;
+	&.show{
+		display: inline-block;
+	}
+	a{
+		float: right;
+		cursor:pointer;
+	    padding: 2px 6px;
+    	margin: -2px -8px;
+    	border: 1px solid #98dfd9;
+	}
+	a:hover{
+		border: 1px solid;
+		background-color: lighten( $primaryback, 10%);
+		border-color: $darkshade;
+	}
+}
+
+.alert-error{
+	background-color: $errorcolor;
+	color: white;
+	a{
+		border: 1px solid lighten( $errorcolor, 10%);
+	}
+	a:hover{
+		border: 1px solid;
+		background-color: lighten( $errorcolor, 10%);
+		border-color: darken( $errorcolor, 10%);
+	}
+}

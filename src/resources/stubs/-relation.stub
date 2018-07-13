@@ -1,0 +1,15 @@
+    public function addresses() {
+
+        return $this
+            ->belongsToMany(Address::class, 'edge_person', 'person_id', 'address_id')
+            ->withPivot('suid', 'domain', 'tag');
+
+    }
+
+    public function {{ relationPlural }}() {
+
+        return $this
+            ->belongsToMany(\App\Models\{{ relationClass }}::class, '{{ edge_name }}', '{{ current }}_id', '{{ relation }}_id')
+            ->withPivot('suid', 'domain', 'tag');
+
+    }

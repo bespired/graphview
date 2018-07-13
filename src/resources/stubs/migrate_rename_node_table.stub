@@ -1,0 +1,58 @@
+<?php
+
+/*
+Graphview generated migration file.
+Made from graphview suid : {{ suid }}, name : {{ name }}
+ */
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class {{ migratename }} extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+
+	public function up() {
+
+		if (Schema::connection('{{ connection }}')->hasTable('node_{{ oldname }}')) {
+			Schema::connection('{{ connection }}')
+				->rename('node_{{ oldname }}', 'node_{{ newname }}');
+		}
+
+		if (Schema::connection('{{ connection }}')->hasTable('{{ oldedgename }}')) {
+			if ('{{ oldedgename }}' != '{{ newedgename }}'){
+				Schema::connection('{{ connection }}')
+					->rename('{{ oldedgename }}', '{{ newedgename }}');
+			}
+		}
+
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+
+	public function down() {
+
+		if (Schema::connection('{{ connection }}')->hasTable('node_{{ newname }}')) {
+			Schema::connection('{{ connection }}')
+			->rename('node_{{ newname }}', 'node_{{ oldname }}');
+		}
+
+		if (Schema::connection('{{ connection }}')->hasTable('{{ newedgename }}')) {
+			if ('{{ oldedgename }}' != '{{ newedgename }}'){
+				Schema::connection('{{ connection }}')
+					->rename('{{ newedgename }}', '{{ oldedgename }}');
+			}
+		}
+
+	}
+
+}

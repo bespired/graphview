@@ -1,0 +1,58 @@
+.node{
+	position: absolute;
+	width: 160px;
+	height: 80px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-size: 300%;
+
+
+	span{
+		text-align: center;
+		width: 100%;
+		margin-top: 20px;
+		display: inline-block;
+		pointer-events: none;
+	}
+}
+
+.multiple-private, .multiple-public, .single-public,
+{
+	background-image: url(/vendor/bespired/graphview/img/schema.png);
+	cursor: pointer;
+}
+
+.multiple-private.selected, .multiple-public.selected, .single-public.selected
+{
+	background-position-x: 50%;
+	cursor: grab;
+	&.moving{
+		cursor: grabbing;
+	}
+}
+
+.multiple-private.edge, .multiple-public.edge, .single-public.edge
+{
+	background-position-x: 100%;
+	cursor: cell;
+}
+
+.multiple-private { background-position-y:   0%; }
+.multiple-public  { background-position-y:  50%; }
+.single-public    { background-position-y: 100%; }
+
+.left-sidebar .node{
+	position: relative;
+	width: 112px;
+	height: 56px;
+
+	&:hover
+	{
+		background-position-x: 50%;
+		cursor: grab;
+		&.moving{
+			cursor: grabbing;
+		}
+	}
+
+}

@@ -1,0 +1,79 @@
+.defs{
+	width: 0;
+	height: 0;
+	position: absolute;
+}
+
+.edge, .connect{
+	position: absolute;
+	stroke: #000;
+	fill: #000;
+	z-index: 1;
+}
+.connect{
+	pointer-events: none;
+	z-index:3;
+}
+
+#arrow {
+	stroke: #000000;
+	fill:   #000000;
+}
+#hover-arrow-start, #hover-arrow-end, #hover-end, #hover-start {
+	stroke: $primaryback;
+	fill: $primaryback;
+}
+
+.edge-out-dir{
+	marker-end: url("#arrow-end");
+}
+.edge-in-dir{
+	marker-start: url("#arrow-start");
+}
+.edge-both-dir{
+	marker-end:   url("#arrow-end");
+	marker-start: url("#arrow-start");
+}
+.edge.arrow-hover, .edge.arrow-start-hover, .edge.arrow-end-hover{
+	z-index: 3;
+	stroke-width: 1;
+	stroke: $primaryback;
+	cursor: pointer;
+}
+.edge.arrow-hover .edge-out-dir{
+	marker-end: url("#hover-arrow-end");
+}
+
+.edge.arrow-hover .edge-both-dir{
+	marker-start: url("#hover-arrow-start");
+	marker-end:   url("#hover-arrow-end");
+}
+
+.edge.arrow-end-hover .edge-out-dir{
+	marker-end: url("#hover-end");
+	cursor: cell;
+}
+.edge.arrow-start-hover .edge-out-dir{
+	marker-start: url("#hover-start");
+	marker-end:   url("#hover-arrow-end");
+	cursor: cell;
+}
+
+.edge.arrow-end-hover .edge-both-dir{
+	marker-start: url("#hover-arrow-start");
+	marker-end:   url("#hover-end");
+	cursor: cell;
+}
+.edge.arrow-start-hover .edge-both-dir{
+	marker-start: url("#hover-start");
+	marker-end:   url("#hover-arrow-end");
+	cursor: cell;
+}
+
+
+.two .edge-out-dir{
+	stroke-dasharray: 5 2;
+}
+.three .edge-out-dir{
+	stroke-dasharray: 5 5 10;
+}
