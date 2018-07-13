@@ -872,6 +872,34 @@ template {
   background-color: #e5f2ef;
 }
 
+.right-sidebar .poprow {
+  position: relative;
+}
+
+.right-sidebar .poprow:after {
+  content: '';
+  border: solid #4b4b4b;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  -webkit-transform: rotate(45deg) translateY(-2px);
+          transform: rotate(45deg) translateY(-2px);
+  margin-left: -20px;
+  margin-top: 9px;
+}
+
+.right-sidebar select {
+  -webkit-appearance: none;
+  width: calc(100% - 15px);
+  padding: 5px;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.right-sidebar select:hover {
+  background: #e5f2ef;
+}
+
 .right-sidebar .create input {
   width: 77%;
   font-size: 1em;
@@ -897,6 +925,21 @@ template {
 .right-sidebar .icon.right {
   float: right;
   visibility: hidden;
+}
+
+.right-sidebar .edge {
+  position: relative;
+  margin-bottom: 1em;
+}
+
+.right-sidebar .edge .icon.right {
+  position: absolute;
+  right: 4px;
+  top: 6px;
+}
+
+.right-sidebar .edge:hover .icon.right {
+  visibility: visible;
 }
 
 .right-sidebar .prop:hover .icon,

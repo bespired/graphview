@@ -45,7 +45,6 @@
         mounted() {
             this.$root.$on('node-select', (data)=>{
                 this.payload = data;
-                console.log(data);
             });
         },
 

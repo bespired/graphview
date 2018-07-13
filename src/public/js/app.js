@@ -30967,18 +30967,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Classes_Edge_js__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Classes_Node_js__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Classes_Save_js__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Components_schema_HeaderComponent__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Components_schema_HeaderComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__Components_schema_HeaderComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Components_schema_LegendaComponent__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Components_schema_LegendaComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__Components_schema_LegendaComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Components_schema_SchemaComponent__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Components_schema_SchemaComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__Components_schema_SchemaComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Components_schema_PropertyComponent__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Components_schema_PropertyComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__Components_schema_PropertyComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Components_draws_SvgMarkers__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Components_draws_SvgMarkers___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__Components_draws_SvgMarkers__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Components_alerts_AlertSuccess__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Components_alerts_AlertSuccess___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__Components_alerts_AlertSuccess__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Classes_Double_js__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Components_schema_HeaderComponent__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Components_schema_HeaderComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__Components_schema_HeaderComponent__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Components_schema_LegendaComponent__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Components_schema_LegendaComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__Components_schema_LegendaComponent__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Components_schema_SchemaComponent__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Components_schema_SchemaComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__Components_schema_SchemaComponent__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Components_schema_PropertyComponent__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Components_schema_PropertyComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__Components_schema_PropertyComponent__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Components_draws_SvgMarkers__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Components_draws_SvgMarkers___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__Components_draws_SvgMarkers__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Components_alerts_AlertSuccess__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Components_alerts_AlertSuccess___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__Components_alerts_AlertSuccess__);
 //
 //
 //
@@ -30991,6 +30992,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -31012,7 +31014,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: 'MainComponent',
 
     components: {
-        AlertSuccess: __WEBPACK_IMPORTED_MODULE_11__Components_alerts_AlertSuccess___default.a, HeaderComponent: __WEBPACK_IMPORTED_MODULE_6__Components_schema_HeaderComponent___default.a, LegendaComponent: __WEBPACK_IMPORTED_MODULE_7__Components_schema_LegendaComponent___default.a, PropertyComponent: __WEBPACK_IMPORTED_MODULE_9__Components_schema_PropertyComponent___default.a, SchemaComponent: __WEBPACK_IMPORTED_MODULE_8__Components_schema_SchemaComponent___default.a, SvgMarkers: __WEBPACK_IMPORTED_MODULE_10__Components_draws_SvgMarkers___default.a
+        AlertSuccess: __WEBPACK_IMPORTED_MODULE_12__Components_alerts_AlertSuccess___default.a, HeaderComponent: __WEBPACK_IMPORTED_MODULE_7__Components_schema_HeaderComponent___default.a, LegendaComponent: __WEBPACK_IMPORTED_MODULE_8__Components_schema_LegendaComponent___default.a, PropertyComponent: __WEBPACK_IMPORTED_MODULE_10__Components_schema_PropertyComponent___default.a, SchemaComponent: __WEBPACK_IMPORTED_MODULE_9__Components_schema_SchemaComponent___default.a, SvgMarkers: __WEBPACK_IMPORTED_MODULE_11__Components_draws_SvgMarkers___default.a
     },
 
     data: function data() {
@@ -31043,7 +31045,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.$root.$on('schema-loaded', function () {
             _this.load();
             _this.$root.$emit('schema-update');
-            // location.reload();
         });
 
         this.$root.$on('set-schema-name', function (event) {
@@ -31066,18 +31067,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 edges.push(new __WEBPACK_IMPORTED_MODULE_3__Classes_Edge_js__["a" /* default */](edge));
             });
 
-            var arrows = [];
-            _.forEach(edges, function (edge) {
-                var aid = edge.startpoint + '.' + edge.endpoint;
-                var exists = _.filter(arrows, function (a) {
-                    return a.suid == aid;
-                })[0];
-                if (exists === undefined) {
-                    arrows.push(new __WEBPACK_IMPORTED_MODULE_2__Classes_Arrow_js__["a" /* default */](edge, nodes));
-                } else {
-                    exists.append(edge, arrows);
-                }
-            });
+            var double = new __WEBPACK_IMPORTED_MODULE_6__Classes_Double_js__["a" /* default */]();
+            var arrows = double.arrows(edges, nodes);
 
             // draw edges are different from data edges...
             global.vuedata.graphic = {
@@ -31101,8 +31092,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
 
             this.$root.$emit('saved');
-        },
-        import: function _import() {}
+        }
     }
 });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
@@ -31385,14 +31375,12 @@ var Move = function () {
 	}, {
 		key: 'stopping',
 		value: function stopping(mode, nodes, arrows, connect) {
+			console.log(mode);
 			switch (mode) {
 
 				// no move move is node select I guess.
 				case 'node-start':
 					return 'node-select';
-
-				case 'edge-start':
-					return '';
 
 				case 'arrow-start':
 					return 'arrow-select';
@@ -31439,12 +31427,37 @@ var Move = function () {
 			});
 		}
 	}, {
-		key: 'selected',
-		value: function selected(nodes) {
+		key: 'selectedNode',
+		value: function selectedNode(nodes) {
 			var selected = null;
 			_.forEach(nodes, function (node) {
 				if (node.selected) {
 					selected = node;
+				}
+			});
+			return selected;
+		}
+	}, {
+		key: 'selectedArrow',
+		value: function selectedArrow(arrows) {
+			var selected = null;
+			_.forEach(arrows, function (arrow) {
+				if (arrow.hover !== '') {
+					selected = arrow;
+					console.log('-->', arrow);
+				}
+			});
+			return selected;
+		}
+	}, {
+		key: 'connectable',
+		value: function connectable(nodes, ignore) {
+			var selected = null;
+			_.forEach(nodes, function (node) {
+				if (ignore === undefined || ignore !== undefined && node.suid != ignore.suid) {
+					if (node.selected || node.on_edge) {
+						selected = node;
+					}
 				}
 			});
 			return selected;
@@ -31702,7 +31715,10 @@ var Edge = function () {
 	function Edge(edge) {
 		_classCallCheck(this, Edge);
 
+		if (!edge) edge = this.newEdge();
+
 		this.suid = edge.suid || new Date().getTime().toString(32).substr(2, 8).toUpperCase();
+		this.name = edge.name || 'No Name';
 		this.type = edge.type || 'single';
 		this.direction = edge.direction || 'out';
 		this.startpoint = edge.startpoint || null;
@@ -31711,47 +31727,27 @@ var Edge = function () {
 
 	_createClass(Edge, [{
 		key: 'create',
-		value: function create(start) {
+		value: function create(startNode, endNode) {
+			this.suid = this.suid || new Date().getTime().toString(32).substr(2, 8).toUpperCase();
+			this.name = this.name || 'No Name';
+			this.type = this.type || 'single';
+			this.direction = this.direction || 'out';
+			this.startpoint = startNode.suid;
+			this.endpoint = endNode.suid;
+			this.draw = null;
+		}
+	}, {
+		key: 'newEdge',
+		value: function newEdge() {
 			return {
+				name: "New Edge",
 				suid: new Date().getTime().toString(32).substr(2, 8).toUpperCase(),
 				type: 'single',
 				direction: 'out',
-				startpoint: start,
-				endpoint: '',
+				startpoint: null,
+				endpoint: null,
 				draw: null
 			};
-		}
-	}, {
-		key: 'connect',
-		value: function connect(node, start) {
-
-			// add edge to draw if none between to nodes.
-			// add relation to the (draw)edge
-
-			// let sn_suid = global.on_edge.suid;
-			// let en_suid = global.connect.suid;
-			// let offset = 0;
-
-			// vuedata.graphic.edges.forEach(function(n, i){
-			// 	if ((n.startpoint === sn_suid) && (n.endpoint === en_suid)){
-			// 		offset++;
-			// 	}
-			// 	if ((n.startpoint === en_suid) && (n.endpoint === sn_suid)){
-			// 		offset++;
-			// 	}
-			// });
-
-			// return{
-			// 	name       : this.name,
-			// 	suid       : new Date().getTime().toString(32).substr(2,8).toUpperCase(),
-			// 	type       : 'has-tag',
-			// 	direction  : 'out',
-			// 	startpoint : sn_suid,
-			// 	endpoint   : en_suid,
-			// 	offset     : offset, // how many different edges between this start and end node
-			// 	draw       : null,
-			// }
-
 		}
 	}]);
 
@@ -31780,8 +31776,6 @@ var Save = function () {
 
 			this.graphicToSchema();
 
-			console.log(global.vuedata.schema.nodes);
-
 			return {
 				"uuid": global.vuedata.uuid,
 				"name": global.vuedata.name,
@@ -31795,6 +31789,23 @@ var Save = function () {
 		key: "graphicToSchema",
 		value: function graphicToSchema() {
 			this.graphicNodesToSchema();
+			this.graphicEdgesToSchema();
+		}
+	}, {
+		key: "graphicEdgesToSchema",
+		value: function graphicEdgesToSchema() {
+			global.vuedata.schema.edges = [];
+			_.each(global.vuedata.graphic.edges, function (edge) {
+				var data = {
+					suid: edge.suid,
+					name: edge.name,
+					type: edge.type,
+					direction: edge.direction,
+					startpoint: edge.startpoint,
+					endpoint: edge.endpoint
+				};
+				global.vuedata.schema.edges.push(data);
+			});
 		}
 	}, {
 		key: "graphicNodesToSchema",
@@ -32595,14 +32606,16 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Classes_Node_js__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Classes_Point_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Classes_Connect_js__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Components_draws_DrawNode__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Components_draws_DrawNode___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Components_draws_DrawNode__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Components_draws_DrawArrow__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Components_draws_DrawArrow___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Components_draws_DrawArrow__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Components_draws_DrawConnect__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Components_draws_DrawConnect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__Components_draws_DrawConnect__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Classes_Edge_js__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Classes_Arrow_js__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Classes_Point_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Classes_Connect_js__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Components_draws_DrawNode__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Components_draws_DrawNode___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__Components_draws_DrawNode__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Components_draws_DrawArrow__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Components_draws_DrawArrow___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__Components_draws_DrawArrow__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Components_draws_DrawConnect__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Components_draws_DrawConnect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__Components_draws_DrawConnect__);
 //
 //
 //
@@ -32617,6 +32630,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 
 
@@ -32631,9 +32646,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: 'SchemaComponent',
 
     components: {
-        DrawNode: __WEBPACK_IMPORTED_MODULE_3__Components_draws_DrawNode___default.a,
-        DrawArrow: __WEBPACK_IMPORTED_MODULE_4__Components_draws_DrawArrow___default.a,
-        DrawConnect: __WEBPACK_IMPORTED_MODULE_5__Components_draws_DrawConnect___default.a
+        DrawNode: __WEBPACK_IMPORTED_MODULE_5__Components_draws_DrawNode___default.a,
+        DrawArrow: __WEBPACK_IMPORTED_MODULE_6__Components_draws_DrawArrow___default.a,
+        DrawConnect: __WEBPACK_IMPORTED_MODULE_7__Components_draws_DrawConnect___default.a
     },
 
     data: function data() {
@@ -32645,13 +32660,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             mode: '',
             hover: '',
             prevmode: '',
-            connect: null
+            connect: null,
+            startnode: null,
+            endnode: null
         };
     },
     mounted: function mounted() {
         var _this = this;
 
-        global.schemapoint = new __WEBPACK_IMPORTED_MODULE_1__Classes_Point_js__["a" /* default */]();
+        global.schemapoint = new __WEBPACK_IMPORTED_MODULE_3__Classes_Point_js__["a" /* default */]();
         global.schemapoint.origin(document.getElementsByClassName("schema")[0]);
 
         this.$root.$on('schema-update', function () {
@@ -32667,6 +32684,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             global.clickpoint = _.clone(global.mouse);
 
             _this.mode = global.constants.move.starting(_this.mode);
+            _this.startnode = global.constants.move.connectable(_this.nodes);
+
             _this.update++;
         };
 
@@ -32679,8 +32698,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.mode = global.constants.move.stopping(_this.mode, _this.nodes, _this.arrows, _this.connect);
 
             if (_this.mode == 'node-select') {
-                var node = global.constants.move.selected(_this.nodes);
+                var node = global.constants.move.selectedNode(_this.nodes);
                 _this.$root.$emit('node-select', node);
+            }
+
+            if (_this.mode == 'arrow-select') {
+                var arrow = global.constants.move.selectedArrow(_this.arrows);
+                _this.$root.$emit('arrow-select', arrow);
+                console.log('ja welke dan?');
             }
 
             if (_this.mode == 'node-move-stopped') {
@@ -32695,11 +32720,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 // then remove nodes
                 _this.nodes = _.reject(_this.nodes, ['remove', true]);
                 global.vuedata.graphic.nodes = _this.nodes;
-                // and the remove edges
+                // and then remove edges
                 // ...
             }
 
             if (_this.mode == 'connect-end') {
+                _this.endnode = global.constants.move.connectable(_this.nodes, _this.startnode);
+                if (_this.endnode !== null) {
+                    var edge = new __WEBPACK_IMPORTED_MODULE_1__Classes_Edge_js__["a" /* default */](null);
+                    edge.create(_this.startnode, _this.endnode);
+
+                    var arrows = global.vuedata.graphic.arrows;
+                    var nodes = global.vuedata.graphic.nodes;
+                    global.vuedata.graphic.edges.push(edge);
+                    global.vuedata.graphic.arrows.push(new __WEBPACK_IMPORTED_MODULE_2__Classes_Arrow_js__["a" /* default */](edge, nodes));
+                }
                 _this.connect = null;
             }
 
@@ -32712,7 +32747,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             _this.prevmode = _this.mode;
 
-            global.mouse = new __WEBPACK_IMPORTED_MODULE_1__Classes_Point_js__["a" /* default */](evt.clientX, evt.clientY);
+            global.mouse = new __WEBPACK_IMPORTED_MODULE_3__Classes_Point_js__["a" /* default */](evt.clientX, evt.clientY);
             global.mouse.sub(global.schemapoint);
 
             if (!global.mousedown) {
@@ -32724,7 +32759,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 _this.hover = global.constants.move.hover(evt, _this.nodes, _this.arrows);
 
-                global.movepoint = new __WEBPACK_IMPORTED_MODULE_1__Classes_Point_js__["a" /* default */](evt.clientX, evt.clientY);
+                global.movepoint = new __WEBPACK_IMPORTED_MODULE_3__Classes_Point_js__["a" /* default */](evt.clientX, evt.clientY);
                 global.movepoint.sub(global.schemapoint);
                 global.movepoint.sub(global.clickpoint);
 
@@ -32744,7 +32779,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 if (_this.mode === 'arrow-start') {
                     var _node = global.constants.move.hovering(_this.nodes);
-                    _this.connect = new __WEBPACK_IMPORTED_MODULE_2__Classes_Connect_js__["a" /* default */](_node);
+                    _this.connect = new __WEBPACK_IMPORTED_MODULE_4__Classes_Connect_js__["a" /* default */](_node);
                     _this.mode = 'arrow-create';
                 }
 
@@ -33285,6 +33320,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Components_schema_properties_NodeProperties___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Components_schema_properties_NodeProperties__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Components_schema_properties_EdgeProperties__ = __webpack_require__(79);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Components_schema_properties_EdgeProperties___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Components_schema_properties_EdgeProperties__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Components_schema_properties_ArrowProperties__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Components_schema_properties_ArrowProperties___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Components_schema_properties_ArrowProperties__);
 //
 //
 //
@@ -33292,6 +33329,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
@@ -33301,7 +33340,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: 'PropertyComponent',
 
     components: {
-        NodeProperties: __WEBPACK_IMPORTED_MODULE_0__Components_schema_properties_NodeProperties___default.a, EdgeProperties: __WEBPACK_IMPORTED_MODULE_1__Components_schema_properties_EdgeProperties___default.a
+        NodeProperties: __WEBPACK_IMPORTED_MODULE_0__Components_schema_properties_NodeProperties___default.a, EdgeProperties: __WEBPACK_IMPORTED_MODULE_1__Components_schema_properties_EdgeProperties___default.a, ArrowProperties: __WEBPACK_IMPORTED_MODULE_2__Components_schema_properties_ArrowProperties___default.a
     },
 
     data: function data() {
@@ -33317,6 +33356,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
         this.$root.$on('edge-select', function () {
             _this.selected = 'edge-properties';
+        });
+        this.$root.$on('arrow-select', function () {
+            _this.selected = 'arrow-properties';
         });
     }
 });
@@ -33422,7 +33464,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         this.$root.$on('node-select', function (data) {
             _this.payload = data;
-            console.log(data);
         });
     },
 
@@ -33701,7 +33742,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'NodeProperies',
+    name: 'EdgeProperies',
 
     data: function data() {
         return {
@@ -33798,6 +33839,17 @@ var render = function() {
             rawName: "v-show",
             value: _vm.selected == "edge-properties",
             expression: "selected=='edge-properties'"
+          }
+        ]
+      }),
+      _vm._v(" "),
+      _c("arrow-properties", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.selected == "arrow-properties",
+            expression: "selected=='arrow-properties'"
           }
         ]
       })
@@ -34428,6 +34480,321 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Classes_Arrow_js__ = __webpack_require__(47);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var Double = function () {
+    function Double() {
+        _classCallCheck(this, Double);
+    }
+
+    _createClass(Double, [{
+        key: 'arrows',
+        value: function arrows(edges, nodes) {
+            var arrows = [];
+            _.forEach(edges, function (edge) {
+                var aid = edge.startpoint + '.' + edge.endpoint;
+                var exists = _.filter(arrows, function (a) {
+                    return a.suid == aid;
+                })[0];
+                if (exists === undefined) {
+                    arrows.push(new __WEBPACK_IMPORTED_MODULE_0__Classes_Arrow_js__["a" /* default */](edge, nodes));
+                } else {
+                    exists.append(edge, arrows);
+                }
+            });
+
+            return arrows;
+        }
+    }]);
+
+    return Double;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Double);
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(98)
+/* template */
+var __vue_template__ = __webpack_require__(99)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/vue/components/schema/properties/ArrowProperties.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3c9491fc", Component.options)
+  } else {
+    hotAPI.reload("data-v-3c9491fc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 98 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'ArrowProperies',
+
+    data: function data() {
+        return {
+            payload: {}
+        };
+    },
+
+
+    computed: {
+        edges: function edges() {
+            console.log('payload edges', this.payload.edges);
+            if (this.payload.edges === undefined) return null;
+            if (_.size(this.payload.edges) == 0) return null;
+            return this.payload.edges;
+        }
+    },
+
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$root.$on('arrow-select', function (data) {
+            console.log('data', data);
+            _this.payload = data;
+        });
+    }
+});
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("h2", { staticClass: "sidebar-title" }, [_vm._v("Edges")]),
+      _vm._v(" "),
+      _vm._l(_vm.edges, function(edge) {
+        return _c("div", { staticClass: "edge" }, [
+          _c("label", [_vm._v("Name")]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "icon right",
+              on: {
+                click: function($event) {
+                  _vm.trash(edge.suid)
+                }
+              }
+            },
+            [_c("i", { staticClass: "icon-trash" })]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: edge.name,
+                expression: "edge.name"
+              }
+            ],
+            attrs: { type: "text" },
+            domProps: { value: edge.name },
+            on: {
+              change: function($event) {
+                _vm.edgylize()
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(edge, "name", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "poprow" }, [
+            _c("label", [_vm._v("Direction")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: edge.direction,
+                    expression: "edge.direction"
+                  }
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      edge,
+                      "direction",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "out" } }, [_vm._v("Out")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "in" } }, [_vm._v("In")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "both" } }, [_vm._v("Both")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "poprow" }, [
+            _c("label", [_vm._v("Type")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: edge.type,
+                    expression: "edge.type"
+                  }
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      edge,
+                      "type",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "single" } }, [
+                  _vm._v("Single")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "multi" } }, [_vm._v("Multi")])
+              ]
+            )
+          ])
+        ])
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3c9491fc", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

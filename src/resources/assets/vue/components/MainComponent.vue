@@ -18,6 +18,7 @@
     import Edge              from '@Classes/Edge.js';
     import Node              from '@Classes/Node.js';
     import Save              from '@Classes/Save.js';
+    import Double            from '@Classes/Double.js';
 
     import HeaderComponent   from '@Components/schema/HeaderComponent';
     import LegendaComponent  from '@Components/schema/LegendaComponent';
@@ -62,7 +63,6 @@
             this.$root.$on('schema-loaded', ()=>{
                 this.load();
                 this.$root.$emit('schema-update');
-                // location.reload();
             });
 
             this.$root.$on('set-schema-name', event => {
@@ -86,17 +86,8 @@
                     edges.push(new Edge(edge));
                 });
 
-                let arrows = [];
-                _.forEach(edges, function(edge) {
-                    let aid = edge.startpoint + '.' + edge.endpoint;
-                    let exists= _.filter(arrows, function(a) { return a.suid == aid; })[0];
-                    if (exists === undefined)
-                    {
-                        arrows.push(new Arrow(edge, nodes));
-                    }else{
-                        exists.append(edge, arrows);
-                    }
-                });
+                let double = new Double();
+                let arrows = double.arrows(edges, nodes);
 
                 // draw edges are different from data edges...
                 global.vuedata.graphic = {
@@ -125,8 +116,8 @@
                 this.$root.$emit('saved');
             },
 
-            import(){
-            },
+            // import(){
+            // },
 
         }
     }

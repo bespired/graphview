@@ -11,7 +11,7 @@
 
 <script>
     export default {
-        name: 'NodeProperies',
+        name: 'EdgeProperies',
 
         data(){
             return {

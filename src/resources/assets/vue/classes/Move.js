@@ -45,14 +45,12 @@ export default class Move {
 	};
 
 	stopping(mode, nodes, arrows, connect) {
+		console.log(mode);
 		switch(mode) {
 
 			// no move move is node select I guess.
 			case 'node-start':
 				return 'node-select';
-
-			case 'edge-start':
-				return '';
 
 			case 'arrow-start':
 				return 'arrow-select';
@@ -97,11 +95,36 @@ export default class Move {
 		});
 	};
 
-	selected(nodes) {
+	selectedNode(nodes) {
 		let selected = null;
 		_.forEach(nodes, (node) => {
 			if (node.selected) {
 				selected = node;
+			}
+		});
+		return selected;
+	};
+
+	selectedArrow(arrows) {
+		let selected = null;
+		_.forEach(arrows, (arrow) => {
+			if (arrow.hover !== '') {
+				selected = arrow;
+				console.log( '-->', arrow);
+
+			}
+		});
+		return selected;
+	};
+
+
+	connectable(nodes, ignore) {
+		let selected = null;
+		_.forEach(nodes, (node) => {
+			if ((ignore === undefined ) || ((ignore !== undefined ) && (node.suid != ignore.suid))){
+				if ((node.selected) || (node.on_edge)){
+					selected = node;
+				}
 			}
 		});
 		return selected;

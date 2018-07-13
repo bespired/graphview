@@ -7,8 +7,6 @@ export default class Save {
 
 		this.graphicToSchema();
 
-		console.log(global.vuedata.schema.nodes);
-
 		return {
 			"uuid" : global.vuedata.uuid,
   			"name" : global.vuedata.name,
@@ -21,6 +19,22 @@ export default class Save {
 
 	graphicToSchema() {
 		this.graphicNodesToSchema();
+		this.graphicEdgesToSchema();
+	}
+
+	graphicEdgesToSchema() {
+		global.vuedata.schema.edges=[];
+		_.each(global.vuedata.graphic.edges, (edge)=>{
+			let data = {
+				suid       : edge.suid,
+				name       : edge.name,
+				type       : edge.type,
+				direction  : edge.direction,
+				startpoint : edge.startpoint,
+				endpoint   : edge.endpoint
+			};
+			global.vuedata.schema.edges.push(data);
+		});
 	}
 
 	graphicNodesToSchema() {

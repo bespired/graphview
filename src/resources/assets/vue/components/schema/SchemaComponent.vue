@@ -15,6 +15,8 @@
 <script>
 
     import Node         from '@Classes/Node.js';
+    import Edge         from '@Classes/Edge.js';
+    import Arrow        from '@Classes/Arrow.js';
     import Point        from '@Classes/Point.js';
     import Connect      from '@Classes/Connect.js';
     import DrawNode     from '@Components/draws/DrawNode';
@@ -33,14 +35,16 @@
 
         data(){
             return {
-                update   : 0,
-                arrows   : null,
-                edges    : null,
-                nodes    : null,
-                mode     : '',
-                hover    : '',
-                prevmode : '',
-                connect  : null,
+                update    : 0,
+                arrows    : null,
+                edges     : null,
+                nodes     : null,
+                mode      : '',
+                hover     : '',
+                prevmode  : '',
+                connect   : null,
+                startnode : null,
+                endnode   : null,
             };
 
         },
@@ -63,6 +67,8 @@
                 global.clickpoint= _.clone(global.mouse);
 
                 this.mode = global.constants.move.starting(this.mode);
+                this.startnode = global.constants.move.connectable(this.nodes);
+
                 this.update++;
             }
 
@@ -80,8 +86,14 @@
                 );
 
                 if ( this.mode == 'node-select') {
-                    let node = global.constants.move.selected(this.nodes);
+                    let node = global.constants.move.selectedNode(this.nodes);
                     this.$root.$emit('node-select', node);
+                }
+
+                if ( this.mode == 'arrow-select') {
+                    let arrow = global.constants.move.selectedArrow(this.arrows);
+                    this.$root.$emit('arrow-select', arrow);
+                    console.log('ja welke dan?');
                 }
 
                 if ( this.mode == 'node-move-stopped') {
@@ -96,11 +108,22 @@
                     // then remove nodes
                     this.nodes= _.reject(this.nodes, ['remove', true]);
                     global.vuedata.graphic.nodes = this.nodes;
-                    // and the remove edges
+                    // and then remove edges
                     // ...
                 }
 
                 if ( this.mode == 'connect-end') {
+                    this.endnode = global.constants.move.connectable(this.nodes, this.startnode);
+                    if ( this.endnode !== null ){
+                        let edge = new Edge(null);
+                        edge.create(this.startnode, this.endnode);
+
+                        let arrows = global.vuedata.graphic.arrows;
+                        let nodes  = global.vuedata.graphic.nodes;
+                        global.vuedata.graphic.edges.push(edge);
+                        global.vuedata.graphic.arrows.push(new Arrow(edge, nodes));
+
+                    }
                     this.connect = null;
                 }
 

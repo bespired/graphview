@@ -6,6 +6,7 @@
         "email": "joeri@bespired.nl"
     }],
     "minimum-stability": "stable",
+    "license": "MIT",
     "require": {
         "symfony/yaml": "^3.4",
         "ramsey/uuid": "^3.7"
