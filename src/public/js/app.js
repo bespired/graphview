@@ -34625,15 +34625,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.$root.$emit('alert-success', 'Schema removed.');
             });
         },
-        scafold: function scafold(row) {
+        scaffold: function scaffold(row) {
             var _this2 = this;
 
             var suid = row.suid;
             axios({
-                url: '/_/graphview/' + suid + '/build/scafold',
+                url: '/_/graphview/' + suid + '/build/scaffold',
                 method: 'GET'
             }).then(function (response) {
-                _this2.$root.$emit('alert-success', 'Schema scafolded.');
+                _this2.$root.$emit('alert-success', 'Schema scaffolded.');
             });
         },
         dump: function dump(row) {
@@ -34712,12 +34712,12 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.stopPropagation()
-                          _vm.scafold(row)
+                          _vm.scaffold(row)
                         }
                       }
                     },
                     [
-                      _vm._v("Scafold "),
+                      _vm._v("Scaffold "),
                       _c("i", { staticClass: "icon-rocket" })
                     ]
                   ),

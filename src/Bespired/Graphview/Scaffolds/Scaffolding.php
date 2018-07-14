@@ -1,23 +1,23 @@
 <?php
 
-namespace Bespired\Graphview\Scafolds;
+namespace Bespired\Graphview\Scaffolds;
 
-use Bespired\Graphview\Traits\ScafoldingName;
-use Bespired\Graphview\Traits\ScafoldingRoute;
-use Bespired\Graphview\Traits\ScafoldingStub;
-use Bespired\Graphview\Traits\ScafoldingSuid;
+use Bespired\Graphview\Traits\ScaffoldingName;
+use Bespired\Graphview\Traits\ScaffoldingRoute;
+use Bespired\Graphview\Traits\ScaffoldingStub;
+use Bespired\Graphview\Traits\ScaffoldingSuid;
 
-class Scafolding {
+class Scaffolding {
 
-	use ScafoldingSuid;
-	use ScafoldingStub;
-	use ScafoldingRoute;
-	use ScafoldingName;
+	use ScaffoldingSuid;
+	use ScaffoldingStub;
+	use ScaffoldingRoute;
+	use ScaffoldingName;
 
-	protected $build, $scafold, $schema, $stubs;
+	protected $build, $scaffold, $schema, $stubs;
 
 	public function migrates($build) {
-		$this->scafold = $build->scafold;
+		$this->scaffold = $build->scaffold;
 		$this->build = objectify($build);
 		$this->schema = collect($this->build->schema->nodes)->keyBy('suid');
 		$this->schema = $this->schema->merge(collect($this->build->schema->edges)->keyBy('suid'));
@@ -46,7 +46,7 @@ class Scafolding {
 		// fix VerifyCsrfToken.php
 
 		// save creation data for the next time
-		$this->saveScafolding();
+		$this->saveScaffolding();
 
 	}
 
@@ -114,7 +114,7 @@ class Scafolding {
 
 	private function writeEdges() {
 		$froms = [];
-		$made = array_keys((array) $this->build->scafold->scafolds->made);
+		$made = array_keys((array) $this->build->scaffold->scaffolds->made);
 		foreach ($this->build->schema->edges as $edge) {
 
 			$startnode = $this->schema[$edge->startpoint];
@@ -130,7 +130,7 @@ class Scafolding {
 				$froms[$nuid]['edge'] = $edge;
 				$froms[$nuid]['props'][$s_name] = $this->prop_suid($s_name . '_id');
 				$froms[$nuid]['props'][$e_name] = $this->prop_suid($e_name . '_id');
-				$this->build->scafold->scafolds->made->$name = 'edge';
+				$this->build->scaffold->scaffolds->made->$name = 'edge';
 			}
 		}
 
@@ -140,14 +140,14 @@ class Scafolding {
 				$filedata = $this->migrationEdgeFile($from['edge'], $from['props']);
 				file_put_contents($filename, $filedata);
 				//
-				$this->scafold[$key] = $from;
+				$this->scaffold[$key] = $from;
 			}
 		}
 	}
 
 	private function writeConfig() {
 		$filename = config_path('model.php');
-		$filedata = $this->scafoldConfigFile();
+		$filedata = $this->scaffoldConfigFile();
 		file_put_contents($filename, $filedata);
 	}
 
@@ -157,15 +157,15 @@ class Scafolding {
 
 		foreach ($this->build->schema->nodes as $node) {
 
-			$filename = $this->modelPath($this->scafoldNameForModel($node));
+			$filename = $this->modelPath($this->scaffoldNameForModel($node));
 			if (!file_exists($filename)) {
-				$filedata = $this->scafoldModelFile($node);
+				$filedata = $this->scaffoldModelFile($node);
 				file_put_contents($filename, $filedata);
 				echo ($filename) . "<br>";
 			}
 
-			$filename = $this->modelPath($this->scafoldNameForTrait($node), true);
-			$filedata = $this->scafoldTraitFile($node);
+			$filename = $this->modelPath($this->scaffoldNameForTrait($node), true);
+			$filedata = $this->scaffoldTraitFile($node);
 			file_put_contents($filename, $filedata);
 			echo ($filename) . "<br>";
 

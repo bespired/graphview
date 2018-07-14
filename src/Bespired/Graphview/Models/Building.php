@@ -3,7 +3,7 @@
 namespace Bespired\Graphview\Models;
 
 use Bespired\Graphview\Models\Evolution;
-use Bespired\Graphview\Models\Scafold;
+use Bespired\Graphview\Models\Scaffold;
 use Bespired\Graphview\Traits\HasShortUuid;
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,8 +31,8 @@ class Building extends Model {
 		return $this->hasMany(Evolution::class, 'belongs_to', 'suid');
 	}
 
-	public function scafold() {
-		return $this->hasOne(Scafold::class, 'belongs_to', 'suid');
+	public function scaffold() {
+		return $this->hasOne(Scaffold::class, 'belongs_to', 'suid');
 	}
 
 }

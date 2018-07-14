@@ -4,7 +4,7 @@ namespace Bespired\Graphview\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Bespired\Graphview\Models\Building;
-use Bespired\Graphview\Scafolds\Scafolding;
+use Bespired\Graphview\Scaffolds\Scaffolding;
 use Bespired\Graphview\Traits\Yamlaar;
 use Illuminate\Http\Request;
 use Symfony\Component\Yaml\Yaml;
@@ -88,10 +88,10 @@ class BuilderController extends Controller {
 
 	//
 
-	public function scafold(Building $suid) {
+	public function scaffold(Building $suid) {
 
-		$scafold = new Scafolding();
-		$scafold->migrates($suid->with(['scafold'])->first());
+		$scaffold = new Scaffolding();
+		$scaffold->migrates($suid->with(['scaffold'])->first());
 
 	}
 

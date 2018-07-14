@@ -3,12 +3,12 @@
 namespace Bespired\Graphview\Commands;
 
 use Bespired\Graphview\Models\Building;
-use Bespired\Graphview\Scafolds\Scafolding;
+use Bespired\Graphview\Scaffolds\Scaffolding;
 use Illuminate\Console\Command;
 
-class Scafold extends Command {
+class Scaffold extends Command {
 
-	protected $signature = 'graphview:scafold';
+	protected $signature = 'graphview:scaffold';
 
 	protected $description = 'Creates migrations for your project from GraphView file.';
 
@@ -46,7 +46,7 @@ class Scafold extends Command {
 		}
 
 		if (count($keys) > 1) {
-			$name = $this->choice('What build do you want to scafold?', $values, 1);
+			$name = $this->choice('What build do you want to scaffold?', $values, 1);
 			$key = $keys[array_search($name, $values)];
 		} else {
 			$key = reset($keys);
@@ -54,8 +54,8 @@ class Scafold extends Command {
 
 		$build = \Bespired\Graphview\Models\Building::whereSuid($key)->first();
 
-		$scafold = new Scafolding();
-		$scafold->migrates($build);
+		$scaffold = new Scaffolding();
+		$scaffold->migrates($build);
 
 	}
 

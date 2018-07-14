@@ -124,7 +124,7 @@ class Install extends Command {
 		$model->schema = config('bespired.graphview.demo');
 		$model->save();
 
-		$scafold = \Bespired\Graphview\Models\Scafold::where('belongs_to', 'demo')->delete();
+		$Scaffold = \Bespired\Graphview\Models\Scaffold::where('belongs_to', 'demo')->delete();
 
 		$this->info(sprintf('Demo Graph created.'));
 	}

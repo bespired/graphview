@@ -5,7 +5,7 @@ namespace Bespired\Graphview\Models;
 use Bespired\Graphview\Traits\HasShortUuid;
 use Illuminate\Database\Eloquent\Model;
 
-class Scafold extends Model {
+class Scaffold extends Model {
 	use HasShortUuid;
 
 	public function getKeyName() {
@@ -14,10 +14,10 @@ class Scafold extends Model {
 
 	protected $connection = 'graphview';
 
-	protected $table = 'scafolds';
+	protected $table = 'scaffolds';
 
 	protected $casts = [
-		'scafolds' => 'array',
+		'scaffolds' => 'array',
 	];
 
 	protected $guarded = [

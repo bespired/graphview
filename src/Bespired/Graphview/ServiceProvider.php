@@ -1,8 +1,9 @@
 <?php
 namespace Bespired\Graphview;
 
+use Bespired\Graphview\Commands\Destroy;
 use Bespired\Graphview\Commands\Install;
-use Bespired\Graphview\Commands\Scafold;
+use Bespired\Graphview\Commands\Scaffold;
 use Illuminate\Support\Facades\Route;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider {
@@ -29,10 +30,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
 		$this->commands([
 			Install::class,
-			Scafold::class,
+			Scaffold::class,
+			Destroy::class,
 		]);
 
-		require_once __DIR__ . '/Scafolds/helpers.php';
+		require_once __DIR__ . '/Scaffolds/helpers.php';
 
 	}
 

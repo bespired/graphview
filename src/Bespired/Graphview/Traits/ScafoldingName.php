@@ -2,7 +2,7 @@
 
 namespace Bespired\Graphview\Traits;
 
-trait ScafoldingName {
+trait ScaffoldingName {
 
 	private function migrationNameForNode($node, $type = null) {
 
@@ -34,7 +34,7 @@ trait ScafoldingName {
 
 	}
 
-	private function scafoldNameForModel($node) {
+	private function scaffoldNameForModel($node) {
 
 		$name = str_name(str_singular($node->name));
 		$className = ucFirst(camel_case($name));
@@ -43,7 +43,7 @@ trait ScafoldingName {
 
 	}
 
-	private function scafoldNameForTrait($node) {
+	private function scaffoldNameForTrait($node) {
 
 		$name = str_name(str_singular($node->name));
 		$className = ucFirst(camel_case($name));
@@ -92,7 +92,7 @@ trait ScafoldingName {
 
 	}
 
-	private function scafoldingName($data, $propname) {
+	private function scaffoldingName($data, $propname) {
 		return strtolower($data->suid) . '.' . $propname;
 	}
 

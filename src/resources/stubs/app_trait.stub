@@ -5,7 +5,7 @@ namespace App\Traits;
 /*
 	Graphview generated trait file.
 	Made from graphview suid : {{ suid }}, name : {{ name }}
-	Don't manual change this file, alterations can be made with scafold.
+	Don't manual change this file, alterations can be made with scaffold.
  */
 
 trait {{ modelname }}Trait {

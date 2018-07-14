@@ -8,7 +8,7 @@
                 <td>{{ row.name }}</td>
                 <td class="action">
                     <a class="button right" @click.stop="dump(row)">Export <i class="icon-export"/></a>
-                    <a class="button right" @click.stop="scafold(row)">Scafold <i class="icon-rocket"/></a>
+                    <a class="button right" @click.stop="scaffold(row)">Scaffold <i class="icon-rocket"/></a>
                     <a class="button right" @click.stop="remove(row.suid)">Delete <i class="icon-trash"/></a>
                 </td>
             </tr>
@@ -69,13 +69,13 @@
                 });
             },
 
-            scafold(row){
+            scaffold(row){
                 const suid = row.suid;
                 axios({
-                    url: `/_/graphview/${suid}/build/scafold`,
+                    url: `/_/graphview/${suid}/build/scaffold`,
                     method: 'GET',
                 }).then((response) => {
-                    this.$root.$emit('alert-success', 'Schema scafolded.');
+                    this.$root.$emit('alert-success', 'Schema scaffolded.');
                 });
             },
 

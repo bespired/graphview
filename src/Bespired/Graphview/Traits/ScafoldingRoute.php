@@ -2,7 +2,7 @@
 
 namespace Bespired\Graphview\Traits;
 
-trait ScafoldingRoute {
+trait ScaffoldingRoute {
 
 	public function routePath($name) {
 

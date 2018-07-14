@@ -2,7 +2,7 @@
 
 namespace Bespired\Graphview\Traits;
 
-trait ScafoldingStub {
+trait ScaffoldingStub {
 
 	private function getStub($type, $filename) {
 
@@ -15,7 +15,7 @@ trait ScafoldingStub {
 	}
 
 	private function migrationNodeRename($data) {
-		$names = $this->build->scafold->scafolds->names;
+		$names = $this->build->scaffold->scaffolds->names;
 
 		$oldName = str_name($names->{$data->suid});
 		$newName = str_name($data->name);
@@ -80,7 +80,7 @@ trait ScafoldingStub {
 
 	}
 
-	private function scafoldConfigFile() {
+	private function scaffoldConfigFile() {
 		$config['with-all'] = [];
 		$config['nodes'] = [];
 		$config['keys'] = [];
@@ -136,15 +136,15 @@ trait ScafoldingStub {
 
 	}
 
-	private function scafoldModelFile($node) {
+	private function scaffoldModelFile($node) {
 
 		$singular_name = str_name(str_singular($node->name));
 		$plural_name = str_name(str_plural($node->name));
 		$className = ucFirst(camel_case($singular_name));
 
 		$relations = [];
-		if (isset($this->scafold[$node->suid])) {
-			foreach ($this->scafold[$node->suid]['props'] as $relation => $dummy) {
+		if (isset($this->scaffold[$node->suid])) {
+			foreach ($this->scaffold[$node->suid]['props'] as $relation => $dummy) {
 				$relations[] = $this->model_prop($singular_name, $relation);
 			}
 		}
@@ -162,15 +162,15 @@ trait ScafoldingStub {
 		return $this->modelFiller('app_model', $replacers);
 	}
 
-	private function scafoldTraitFile($node) {
+	private function scaffoldTraitFile($node) {
 
 		$singular_name = str_name(str_singular($node->name));
 		$plural_name = str_name(str_plural($node->name));
 		$className = ucFirst(camel_case($singular_name));
 
 		$relations = [];
-		if (isset($this->scafold[$node->suid])) {
-			foreach ($this->scafold[$node->suid]['props'] as $relation => $dummy) {
+		if (isset($this->scaffold[$node->suid])) {
+			foreach ($this->scaffold[$node->suid]['props'] as $relation => $dummy) {
 				$relations[] = $this->model_prop($singular_name, $relation);
 			}
 		}
@@ -251,26 +251,26 @@ trait ScafoldingStub {
 	}
 
 	private function properties($node) {
-		$made = array_keys((array) $this->build->scafold->scafolds->made);
+		$made = array_keys((array) $this->build->scaffold->scaffolds->made);
 		$after = $node->migrate_type == 'create' ? '' : 'tag';
 		$props = [];
 
 		if (isset($node->props->keys)) {
 			foreach ($node->props->keys as $key => $type) {
-				$name = $this->scafoldingName($node, $key);
+				$name = $this->scaffoldingName($node, $key);
 				if (!in_array($name, $made)) {
 					$props[] = $this->prop_key($key, $after);
-					$this->build->scafold->scafolds->made->$name = 'key';
+					$this->build->scaffold->scaffolds->made->$name = 'key';
 				}
 			}
 		}
 
 		if (isset($node->props->strings)) {
 			foreach ($node->props->strings as $string => $type) {
-				$name = $this->scafoldingName($node, $string);
+				$name = $this->scaffoldingName($node, $string);
 				if (!in_array($name, $made)) {
 					$props[] = $this->prop_string($string, $after);
-					$this->build->scafold->scafolds->made->$name = 'string';
+					$this->build->scaffold->scaffolds->made->$name = 'string';
 				}
 			}
 		}
