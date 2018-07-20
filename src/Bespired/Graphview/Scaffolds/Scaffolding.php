@@ -97,14 +97,16 @@ class Scaffolding {
 		foreach ($this->build->schema->nodes as $node) {
 			$filename = $this->migrationPath($this->migrationNameForNode($node));
 
+			echo "$filename <br>";
+
 			if ($filedata = $this->migrationNodeRename($node)) {
 				file_put_contents($filename, $filedata);
-				echo ($filename) . "<br>";
+				echo 'Rename:' . $filename . "<br>";
 			}
 
 			if ($filedata = $this->migrationNodeFile($node)) {
 				file_put_contents($filename, $filedata);
-				echo ($filename) . "<br>";
+				echo 'Node:' . $filename . "<br>";
 			}
 		}
 

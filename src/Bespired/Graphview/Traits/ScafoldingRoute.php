@@ -66,12 +66,28 @@ trait ScaffoldingRoute {
 
 		file_put_contents($this->routePath('graphview.php'), $this->routeFiller($laravel_routes));
 
-		$web = file_get_contents($this->routePath('web.php'));
-		if (strpos($web, 'graphview.php') === false) {
-			$web = $web . "\n\n" . '@include_once "graphview.php";' . "\n";
-			file_put_contents($this->routePath('web.php'), $web);
-		}
+		$this->routeservice();
 
+	}
+
+	private function routeservice() {
+		$rspfile = app_path('Providers/RouteServiceProvider.php');
+		$rsp = file_get_contents($rspfile);
+
+		if (strpos($rsp, '$this->mapGraphRoutes') === false) {
+			$pos = strrpos($rsp, '}');
+			$stub = $this->getStub('routeservice', $this->stubsPath('routeservice.stub'));
+			$rsp = substr_replace($rsp, $stub, $pos, 0);
+
+			$re = '/function map\(([\s\S])*(})/muU';
+			preg_match_all($re, $rsp, $matches, PREG_OFFSET_CAPTURE, 0);
+			$pos = $matches[1][0][1];
+			$stub = "\t\t\$this->mapGraphRoutes();\n";
+			$rsp = substr_replace($rsp, $stub, $pos, 0);
+
+			file_put_contents($rspfile, $rsp);
+
+		}
 	}
 
 	private function routing($routes, $gets) {

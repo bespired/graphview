@@ -45,7 +45,7 @@ trait ScaffoldingStub {
 
 		$properties = $this->properties($data);
 
-		if (empty($properties)) {
+		if (empty($properties) && ($data->migrate_type != 'create')) {
 			return null;
 		}
 
